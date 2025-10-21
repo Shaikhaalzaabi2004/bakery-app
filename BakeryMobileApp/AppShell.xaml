@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Session6.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Session6"
+    Title="Session6"
+    FlyoutBehavior="Disabled">
+    
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" IsEnabled="False" />
+    </Shell.BackButtonBehavior>
+    
+    <ShellContent
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+    
+    <TabBar Route="Tabs">
+        
+        <ShellContent
+            Title="Home"
+            Icon="home.png"
+            Route="home"
+            ContentTemplate="{DataTemplate local:ProductCatalog}" />
+
+        <ShellContent
+            Title="Favorites"
+            Icon="heart.png"
+            Route="favorites"
+            ContentTemplate="{DataTemplate local:FavoritesPage}" />
+
+        <ShellContent
+            Title="Orders"
+            Icon="list.png"
+            Route="orders"
+            ContentTemplate="{DataTemplate local:Orders}" />
+    </TabBar>
+
+</Shell>

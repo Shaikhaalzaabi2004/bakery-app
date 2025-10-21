@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Session6.MainPage">
+
+    <ScrollView
+        Margin="10"
+        Padding="10"
+        HorizontalOptions="Center">
+        
+        <StackLayout
+            Padding="10"
+            Margin="10"
+            HorizontalOptions="Center">
+
+            <Label x:Name="TimeLabel"
+                    FontSize="32"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    VerticalTextAlignment="Center"/>
+            
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Label x:Name="DayLabel"
+                       FontSize="18"
+                       VerticalTextAlignment="Center"/>
+
+                <Label x:Name="DateLabel"
+                       FontSize="18"
+                       VerticalTextAlignment="Center"
+                       Margin="10, 0, 0, 0"/>
+            </HorizontalStackLayout>
+
+            <VerticalStackLayout 
+                Margin="0, 30, 0, 0"
+                Padding="5">
+                <VerticalStackLayout>
+                    <Label Text="Email"/>
+                    <Entry x:Name="emailEntry" WidthRequest="250"/>
+                </VerticalStackLayout>
+                
+                <VerticalStackLayout Margin="0, 20">
+                    <Label Text="Password"/>
+                    <Entry IsPassword="True" x:Name="passEntry" WidthRequest="250"/>
+                </VerticalStackLayout>
+
+                <Button Text="Login" WidthRequest="250" x:Name="loginBtn" Clicked="loginBtn_Clicked" Margin="0, 30"/>
+            </VerticalStackLayout>
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

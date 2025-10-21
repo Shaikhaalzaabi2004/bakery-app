@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Session6.ViewModels.CartPage"
+             Title="Cart">
+    <ScrollView
+        HorizontalOptions="Center">
+        <StackLayout
+            Margin="10">
+            
+            <Label Text="My Cart" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="Center"/>
+            
+            <CollectionView 
+                Margin="0, 20"
+                HeightRequest="600"
+                ItemsSource="{Binding Cart}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame
+                            WidthRequest="530"
+                            CornerRadius="15"
+                            Margin="10">
+                            <Grid
+                                Padding="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <Image Source="{Binding PhotoName}" Grid.Column="0" Grid.RowSpan="3" Margin="0, 0, 20, 0"/>
+                                <Label Text="{Binding ProductName}" FontAttributes="Bold" Grid.Column="1" Grid.Row="0"/>
+                                <Label Text="{Binding Price, StringFormat='Price: {0}'}" Grid.Column="1" Grid.Row="1"/>
+                                <Label Text="x" 
+                                       FontSize="21" 
+                                       FontAttributes="Bold" 
+                                       Grid.Column="2" 
+                                       Grid.Row="0" 
+                                       HorizontalOptions="End">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer x:Name="removeItem" Tapped="removeItem_Tapped"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <HorizontalStackLayout Grid.Row="2" Grid.Column="2" HorizontalOptions="End">
+                                    <Label Text="-  " FontAttributes="Bold" FontSize="23" VerticalOptions="Center">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer x:Name="decrease" Tapped="decrease_Tapped"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <Label Text="{Binding Quantity}" VerticalOptions="Center"/>
+                                </HorizontalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Grid
+                Margin="15"
+                WidthRequest="530">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label Text="Total" Grid.Column="0"/>
+                <Label Text="{Binding FinalPrice}" Grid.Column="1" HorizontalTextAlignment="End"/>
+            </Grid>
+
+            <Button Margin="0, 40, 0, 0" WidthRequest="530" Text="Checkout" x:Name="checkoutBtn" Clicked="checkoutBtn_Clicked"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

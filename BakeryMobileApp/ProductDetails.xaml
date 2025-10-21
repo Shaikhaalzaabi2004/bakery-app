@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Session6.ProductDetails"
+             Title="Product Details">
+    <VerticalStackLayout
+        Margin="20"
+        Padding="10"
+        WidthRequest="600">
+
+
+        <HorizontalStackLayout>
+            <Image Source="{Binding Product.PhotoName}" WidthRequest="150" VerticalOptions="Center"/>
+
+            <VerticalStackLayout Margin="20, 0, 0, 0">
+                <Label Text="{Binding Product.Name}" FontAttributes="Bold" FontSize="Medium" Margin="0, 20, 0, 0"/>
+
+                <Label Text="{Binding Product.Price, StringFormat='Price: {0}'}" Margin="0, 20, 0, 0"/>
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout Margin="0, 20, 0, 0">
+            <Label Text="Ingredients:"/>
+
+            <CollectionView 
+                Margin="20, 0, 0, 0"
+                ItemsSource="{Binding Product.ProductsIngredients}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="." VerticalOptions="Center" FontAttributes="Bold" FontSize="Large" Grid.Column="0"/>
+                            <Label Text="{Binding Ingredient.Name}" VerticalOptions="Center" Grid.Column="1" Margin="20, 0"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </HorizontalStackLayout>
+
+
+        <HorizontalStackLayout Margin="0, 30, 0, 0">
+            <HorizontalStackLayout>
+                <Label Text="Count:"/>
+                
+                <Entry
+                    Keyboard="Numeric"
+                    WidthRequest="120"
+                    Text="{Binding Quantity, Mode=TwoWay}" 
+                    Margin="20, 0"/>
+
+                <Stepper
+                    WidthRequest="100"
+                    Increment="1"
+                    Value="{Binding Quantity, Mode=TwoWay}" />
+                
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Margin="100, 0, 0, 0">
+                <Image Source="cart.png" WidthRequest="50"/>
+                <Button x:Name="addToCartBtn" Text="Add To Cart" Clicked="addToCartBtn_Clicked"/>
+            </HorizontalStackLayout>
+
+        </HorizontalStackLayout>
+        
+        <VerticalStackLayout Margin="0, 40, 0, 0">
+            <Label Text="{Binding FinalPrice, StringFormat='Final Price: {0}'}"/>
+            <Label Text="{Binding ItemsInCart, StringFormat='Items on cart ({0})'}"/>
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

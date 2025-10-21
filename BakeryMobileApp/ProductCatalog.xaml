@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Session6.ProductCatalog"
+             Title="Product Catalog">
+    <AbsoluteLayout
+        HorizontalOptions="Center">
+        
+        <ScrollView
+            Padding="10"
+            Margin="10">
+            
+            <StackLayout>
+                <Label Text="Sign Out" 
+                       TextColor="Gray" 
+                       HorizontalOptions="Start" 
+                       TextDecorations="Underline"
+                       FontSize="15">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="SignOut" Tapped="SignOut_Tapped"></TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Image Source="cart.png" WidthRequest="50" HorizontalOptions="End">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="cart" Tapped="cart_Tapped"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <HorizontalStackLayout Margin="0, 30, 0, 0">
+                    <Button x:Name="categoryBtn" Text="Select Categories" WidthRequest="200" Clicked="categoryBtn_Clicked"/>
+                    <Entry x:Name="searchEntry" WidthRequest="280" TextChanged="searchEntry_TextChanged" Margin="50, 0, 0, 0"/>
+                </HorizontalStackLayout>
+
+                <StackLayout 
+                    x:Name="categoriesStack"
+                    IsVisible="False"
+                    AbsoluteLayout.LayoutBounds="0, 0, -1, -1"
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    Margin="0, 20, 0, 0">
+                    <CollectionView
+                        ItemsSource="{Binding Categories}"
+                        HeightRequest="150">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40"></ColumnDefinition>
+                                        <ColumnDefinition Width="100"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <CheckBox x:Name="categoryCb" CheckedChanged="categoryCb_CheckedChanged" Grid.Column="0"/>
+                                    <Label Text="{Binding Name}" Grid.Column="1" VerticalOptions="Center"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <Button Text="Apply" WidthRequest="80" Clicked="Button_Clicked" HorizontalOptions="Start"/>
+                </StackLayout>
+
+                <StackLayout Margin="0, 40, 0, 0" x:Name="nonFavorites">
+                    <CollectionView
+                        x:Name="productCv"
+                        ItemsSource="{Binding NonFavoriteProducts}"
+                        HeightRequest="850">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame
+                                    WidthRequest="530"
+                                    CornerRadius="15"
+                                    Margin="10">
+                                    <Grid
+                                        RowSpacing="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+
+                                        <Image Source="{Binding PhotoName}" Grid.Column="0" Grid.RowSpan="3" Margin="0, 0, 20, 0"/>
+
+                                        <Label Text="{Binding Name}" Grid.Column="1" Grid.Row="0" FontAttributes="Bold" VerticalOptions="Center"/>
+                                        <Label Text="{Binding Price, StringFormat='Price: {0}'}" Grid.Column="1" Grid.Row="2"/>
+                                        <Label Text="Details" TextDecorations="Underline" VerticalOptions="Center" TextColor="Blue" Grid.Column="2" Grid.Row="2">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer x:Name="details" Tapped="details_Tapped"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Image Source="heart_outline.png" Grid.Column="3" Grid.Row="2" WidthRequest="50">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer x:Name="favorite" Tapped="favorite_Tapped"/>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </AbsoluteLayout>
+</ContentPage>
